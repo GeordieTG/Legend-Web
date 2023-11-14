@@ -18,19 +18,35 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  myself: Scalars['String']['output'];
-  teams: Scalars['String']['output'];
+  user: UserType;
+};
+
+
+export type QueryUserArgs = {
+  username?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A user of the legend application */
+export type UserType = {
+  __typename?: 'UserType';
+  email: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  username: Scalars['String']['output'];
 };
 
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserQuery = { __typename?: 'Query', myself: string };
+export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'UserType', username: string, name: string, email: string } };
 
 
 export const GetUserDocument = gql`
     query GetUser {
-  myself
+  user(username: "geordietg") {
+    username
+    name
+    email
+  }
 }
     `;
 export type Requester<C = {}, E = unknown> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<ExecutionResult<R, E>> | AsyncIterable<ExecutionResult<R, E>>
