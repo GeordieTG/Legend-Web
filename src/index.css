@@ -108,8 +108,12 @@ a {
   right: 0;
 }
 
+.sidebarText {
+  color: white;
+}
+
 p {
-  color: white
+  color: black
 }
 
 body {
@@ -127,6 +131,7 @@ h1 {
 }
 
 h1 {
+  color: black;
   font-family: "Raleway";
   font-size: 2.0em;
   line-height: 1.1;
@@ -153,15 +158,4 @@ h1 {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
 }

@@ -12,6 +12,7 @@ import SearchLeagues from "./pages/leagues/SearchLeagues";
 import CreateLeague from "./pages/leagues/CreateLeague";
 import Trade from "./pages/team/Trade";
 import League from './pages/leagues/League';
+import Leaderboard from './pages/leaderboard';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                         <Route path="/team/trade" element={<Trade />}/>
                         <Route path="/statistics" element={<Statistics />}/>
                         <Route path="/league" element={<League />}/>
+                        <Route path="/leaderboard" element={<Leaderboard />}/>
                     </Routes>
                 </div>
             </Router>

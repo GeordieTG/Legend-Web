@@ -9,22 +9,22 @@ const Sidebar = () => {
             <div className="mt-20 flex flex-col gap-10">
 
                 <div className="flex space-x-4">
-                    <p><i className="bi bi-dribbble"></i></p>
+                    <p><i className="sidebarText bi bi-dribbble"></i></p>
                     <Link to="/team">Team</Link>
                 </div>
 
                 <div className="flex space-x-4">
-                    <p><i className="bi bi-trophy"></i> </p>
+                    <p><i className="sidebarText bi bi-trophy"></i> </p>
                     <Link to="/leagues">Leagues</Link>
                 </div>
 
                 <div className="flex space-x-4">
-                    <p><i className="bi bi-trophy"></i> </p>
-                    <Link to="/leagues">Leaderboard</Link>
+                    <p><i className="sidebarText bi bi-trophy"></i> </p>
+                    <Link to="/leaderboard">Leaderboard</Link>
                 </div>
 
                 <div className="flex space-x-4">
-                    <p><i className="bi bi-bar-chart"></i></p>
+                    <p><i className="sidebarText bi bi-bar-chart"></i></p>
                     <Link to="/statistics">Statistics</Link>
                 </div>
 
@@ -40,7 +40,7 @@ const Sidebar = () => {
                     />
                     <div>
                         <Link to="/profile">Geordie Gibson</Link>
-                        <p>CRL</p>
+                        <p className="sidebarText">CRL</p>
                     </div>
                 </div>
             </div>
