@@ -1,4 +1,4 @@
-const Player = (props) => {
+const Player = (props: any) => {
     return (
         <div className="flex flex-col items-center">
 

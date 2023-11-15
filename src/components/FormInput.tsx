@@ -1,4 +1,4 @@
-const formInput = (props) => {
+const formInput = (props: any) => {
     return (
         <>
             <label htmlFor={props.type} className="block text-sm font-medium leading-6 text-gray-900">

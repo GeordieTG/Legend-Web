@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 
-const LeaguesMenu = (props) => {
+const LeaguesMenu = (props: any) => {
     return (
         <div className="flex justify-evenly">
             <Link to="/leagues" className={`menuItem ${props.page === "leagues" ? "underline" : ""}`} style={{color:"#213547"}}>My Leagues</Link>

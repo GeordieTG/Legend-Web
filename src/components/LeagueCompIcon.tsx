@@ -1,4 +1,4 @@
-const LeagueCompIcon = (props) => {
+const LeagueCompIcon = (props: any) => {
     return (
         <div className="flex flex-col items-center">
 
