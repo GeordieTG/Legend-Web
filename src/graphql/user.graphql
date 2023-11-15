@@ -1,7 +1,10 @@
-query GetUser {
-  user(username: "geordietg") {
-    username,
+query GetUser($token: String!) {
+  user(token: $token) {
     name,
     email
   }
+} 
+
+mutation CreateUser($token: String!, $email: String!, $name: String!) {
+  createUser(token: $token, email: $email, name: $name)
 } 

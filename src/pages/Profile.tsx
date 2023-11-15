@@ -8,9 +8,11 @@ import { UserType } from "../graphql";
 const Profile = () => {
 
     const [user, setUser] = useState<UserType>();
+    const token: any = localStorage.getItem("user")
+    console.log(token)
 
     React.useEffect(() => {
-        api.GetUser().then((response) => {setUser(response.user)})
+        api.GetUser({ token: token }).then((response: any) => {setUser(response.user)})
     }, []);
         
     return (
@@ -32,7 +34,7 @@ const Profile = () => {
                     />
                     <div className="ml-5 mt-4">
                         <h2 style={{fontSize:"24px"}} className="raleway text-black">{user?.name}</h2>
-                        <p className="text-gray-600">@{user?.username}</p>
+                        <p className="text-gray-600">{user?.email}</p>
 
                         <div className="flex space-x-5 mt-4">
                             <p className="text-black"><i className="bi bi-geo-alt"></i> New Zealand</p>
