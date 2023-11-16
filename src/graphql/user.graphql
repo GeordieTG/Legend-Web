@@ -8,3 +8,11 @@ query GetUser($token: String!) {
 mutation CreateUser($token: String!, $email: String!, $name: String!) {
   createUser(token: $token, email: $email, name: $name)
 } 
+
+query GetLeagues {
+  leagues {
+    name,
+    city,
+    owner_id
+  }
+}

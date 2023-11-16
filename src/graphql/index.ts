@@ -16,6 +16,14 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+/** A league of users that compete within an organisation */
+export type LeagueType = {
+  __typename?: 'LeagueType';
+  city: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  owner_id: Scalars['Int']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: Scalars['Boolean']['output'];
@@ -30,6 +38,7 @@ export type MutationCreateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  leagues: Array<LeagueType>;
   user: UserType;
 };
 
@@ -61,6 +70,11 @@ export type CreateUserMutationVariables = Exact<{
 
 export type CreateUserMutation = { __typename?: 'Mutation', createUser: boolean };
 
+export type GetLeaguesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetLeaguesQuery = { __typename?: 'Query', leagues: Array<{ __typename?: 'LeagueType', name: string, city: string, owner_id: number }> };
+
 
 export const GetUserDocument = gql`
     query GetUser($token: String!) {
@@ -75,6 +89,15 @@ export const CreateUserDocument = gql`
   createUser(token: $token, email: $email, name: $name)
 }
     `;
+export const GetLeaguesDocument = gql`
+    query GetLeagues {
+  leagues {
+    name
+    city
+    owner_id
+  }
+}
+    `;
 export type Requester<C = {}, E = unknown> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<ExecutionResult<R, E>> | AsyncIterable<ExecutionResult<R, E>>
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
@@ -83,6 +106,9 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
     },
     CreateUser(variables: CreateUserMutationVariables, options?: C): Promise<ExecutionResult<CreateUserMutation, E>> {
       return requester<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, variables, options) as Promise<ExecutionResult<CreateUserMutation, E>>;
+    },
+    GetLeagues(variables?: GetLeaguesQueryVariables, options?: C): Promise<ExecutionResult<GetLeaguesQuery, E>> {
+      return requester<GetLeaguesQuery, GetLeaguesQueryVariables>(GetLeaguesDocument, variables, options) as Promise<ExecutionResult<GetLeaguesQuery, E>>;
     }
   };
 }

@@ -2,8 +2,26 @@ import Sidebar from "../../components/Sidebar";
 import LeaguesMenu from "../../components/LeaguesMenu";
 import LeaguePreview from "../../components/LeaguePreview";
 import SearchBar from "../../components/SearchBar";
+import { api } from "../../graphql/requester";
+import React, { useState } from 'react'
+import { LeagueType } from "../../graphql";
 
 const SearchLeagues = () => {
+
+    const [leagues, setLeagues] = useState<Array<LeagueType>>([]);
+
+    React.useEffect(() => {
+        api.GetLeagues().then((response: any) => {setLeagues(response.leagues)})
+    }, [])
+
+    const leaguePreviews = () => {
+        return leagues.map((league: any, index: any) =>
+            <div>
+                <LeaguePreview key={index} league={league}/>
+            </div>
+        )
+    }
+
     return (
         <>
             <div className="flex bg-zinc-100">
@@ -16,11 +34,12 @@ const SearchLeagues = () => {
                         <SearchBar />
                     </div>
                     
-                    {/*Users Leagues*/}
                     <div className="space-y-3 mt-12">
-                        <LeaguePreview name="John Paul II High School" location="Greymouth" currentMembers="4" maxMembers="16"/>
-                        <LeaguePreview name="University of Canterbury" location="Christchurch" currentMembers="15" maxMembers="16"/>
-                        <LeaguePreview name="West Coast Wounders" location="Hokitika" currentMembers="1" maxMembers="8"/>
+                        <div className="container mt-4">
+                            {leagues.length ? <div className="d-flex flex-wrap justify-content-evenly">
+                                {leaguePreviews()}
+                            </div> : <div><div className="text-center display-5"><i className="bi bi-emoji-frown-fill"></i></div> <div className="fs-5 text-center"> No leagues meet the search criteria</div></div>}
+                        </div>
                     </div>
 
                 </div>
