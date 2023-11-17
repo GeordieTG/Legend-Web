@@ -1,6 +1,6 @@
 import Player from "./Player";
 
-const TeamRow = (props) => {
+const TeamRow = (props: any) => {
 
     const pfpArray = Array.from({ length: props.number }, (_, index) => index);
 

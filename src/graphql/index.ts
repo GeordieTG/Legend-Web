@@ -16,28 +16,99 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Query = {
-  __typename?: 'Query';
-  myself: Scalars['String']['output'];
-  teams: Scalars['String']['output'];
+/** A league of users that compete within an organisation */
+export type LeagueType = {
+  __typename?: 'LeagueType';
+  city: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  owner_id: Scalars['Int']['output'];
 };
 
-export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
+export type Mutation = {
+  __typename?: 'Mutation';
+  createUser: Scalars['Boolean']['output'];
+};
 
 
-export type GetUserQuery = { __typename?: 'Query', myself: string };
+export type MutationCreateUserArgs = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  token?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Query = {
+  __typename?: 'Query';
+  leagues: Array<LeagueType>;
+  user: UserType;
+};
+
+
+export type QueryUserArgs = {
+  token?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A user of the legend application */
+export type UserType = {
+  __typename?: 'UserType';
+  email: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type GetUserQueryVariables = Exact<{
+  token: Scalars['String']['input'];
+}>;
+
+
+export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'UserType', name: string, email: string } };
+
+export type CreateUserMutationVariables = Exact<{
+  token: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+}>;
+
+
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: boolean };
+
+export type GetLeaguesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetLeaguesQuery = { __typename?: 'Query', leagues: Array<{ __typename?: 'LeagueType', name: string, city: string, owner_id: number }> };
 
 
 export const GetUserDocument = gql`
-    query GetUser {
-  myself
+    query GetUser($token: String!) {
+  user(token: $token) {
+    name
+    email
+  }
+}
+    `;
+export const CreateUserDocument = gql`
+    mutation CreateUser($token: String!, $email: String!, $name: String!) {
+  createUser(token: $token, email: $email, name: $name)
+}
+    `;
+export const GetLeaguesDocument = gql`
+    query GetLeagues {
+  leagues {
+    name
+    city
+    owner_id
+  }
 }
     `;
 export type Requester<C = {}, E = unknown> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<ExecutionResult<R, E>> | AsyncIterable<ExecutionResult<R, E>>
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
-    GetUser(variables?: GetUserQueryVariables, options?: C): Promise<ExecutionResult<GetUserQuery, E>> {
+    GetUser(variables: GetUserQueryVariables, options?: C): Promise<ExecutionResult<GetUserQuery, E>> {
       return requester<GetUserQuery, GetUserQueryVariables>(GetUserDocument, variables, options) as Promise<ExecutionResult<GetUserQuery, E>>;
+    },
+    CreateUser(variables: CreateUserMutationVariables, options?: C): Promise<ExecutionResult<CreateUserMutation, E>> {
+      return requester<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, variables, options) as Promise<ExecutionResult<CreateUserMutation, E>>;
+    },
+    GetLeagues(variables?: GetLeaguesQueryVariables, options?: C): Promise<ExecutionResult<GetLeaguesQuery, E>> {
+      return requester<GetLeaguesQuery, GetLeaguesQueryVariables>(GetLeaguesDocument, variables, options) as Promise<ExecutionResult<GetLeaguesQuery, E>>;
     }
   };
 }

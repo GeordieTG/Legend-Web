@@ -1,5 +1,4 @@
 import Sidebar from "../../components/Sidebar";
-import LeaguePreview from "../../components/LeaguePreview";
 import LeaguesMenu from "../../components/LeaguesMenu";
 
 
@@ -13,9 +12,6 @@ const MyLeagues = () => {
 
                 {/*Users Leagues*/}
                 <div className="space-y-3 mt-20">
-                    <LeaguePreview name="John Paul II High School" location="Greymouth" currentMembers="4" maxMembers="16"/>
-                    <LeaguePreview name="University of Canterbury" location="Christchurch" currentMembers="15" maxMembers="16"/>
-                    <LeaguePreview name="West Coast Wounders" location="Hokitika" currentMembers="1" maxMembers="8"/>
                 </div>
 
             </div>

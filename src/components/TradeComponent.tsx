@@ -1,6 +1,6 @@
 import Player from "./Player";
 
-const TradeComponent = (props) => {
+const TradeComponent = (props: any) => {
     return (
         <>
             <p className="text-black font-medium text-center">Trade {props.number}</p>
