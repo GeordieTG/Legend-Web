@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.5",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
     "apollo-client": "^2.6.10",
     "bootstrap-icons": "^1.11.1",
     "graphql": "^15.8.0",
