@@ -1,7 +1,6 @@
 import './App.css'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Login from "./pages/admin/Login";
-import Register from "./pages/admin/Register";
 import LandingPage from "./pages/admin/LandingPage";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Profile from "./pages/Profile";
@@ -24,7 +23,6 @@ function App() {
                     <Routes>
                         <Route path="/" element={<LandingPage />}/>
                         <Route path="/login" element={<Login />}/>
-                        <Route path="/register" element={<Register />}/>
                         <Route path="/profile" element={<Profile />}/>
                         <Route path="/leagues" element={<MyLeagues />}/>
                         <Route path="/leagues/search" element={<SearchLeagues />}/>

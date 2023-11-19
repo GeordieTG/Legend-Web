@@ -5,7 +5,7 @@ const formInput = (props: any) => {
                 {props.label}
             </label>
 
-            <input max="10" step="1" type={props.type} placeholder={props.placeholder}></input>
+            <input style={{color: "black" }} max="10" step="1" type={props.type} placeholder={props.placeholder} onChange={props.onChange}></input>
         </>
     )
 }

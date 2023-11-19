@@ -10,9 +10,8 @@ const LandingPage = () => {
                 <p className="text-xl raleway mt-5 text-black text-center">turning fantasy into reality</p>
 
                 {/*Login and Register Buttons*/}
-                <div className="mt-16 flex gap-4">
+                <div className="mt-16">
                     <Button path={"/login"} text={"Login"}/>
-                    <Button path={"/register"} text={"Register"}/>
                 </div>
             </div>
 

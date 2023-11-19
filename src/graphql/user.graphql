@@ -9,10 +9,43 @@ mutation CreateUser($token: String!, $email: String!, $name: String!) {
   createUser(token: $token, email: $email, name: $name)
 } 
 
+mutation CreateLeague($name: String!, $city: String!, $size: Int!, $owner_id: String!) {
+  createLeague(name: $name, city: $city, size: $size, owner_id: $owner_id)
+} 
+
 query GetLeagues {
   leagues {
+    id,
     name,
     city,
-    owner_id
+    size
+  }
+}
+
+query GetLeague($id: String!) {
+  league(id: $id) {
+    id,
+    name,
+    city,
+    size
+  }
+}
+
+query GetUsersLeagues($token: String!) {
+  user(token: $token) {
+    leagues {
+      id,
+      name,
+      city,
+      size
+    }
+  }
+}
+
+query GetMessages($room: String!) {
+  messages(room: $room) {
+    text,
+    name,
+    time
   }
 }

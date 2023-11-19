@@ -16,8 +16,8 @@ const SearchLeagues = () => {
 
     const leaguePreviews = () => {
         return leagues.map((league: any, index: any) =>
-            <div>
-                <LeaguePreview key={index} league={league}/>
+            <div key={index}>
+                <LeaguePreview league={league}/>
             </div>
         )
     }

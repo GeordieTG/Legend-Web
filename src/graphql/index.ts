@@ -20,13 +20,33 @@ export type Scalars = {
 export type LeagueType = {
   __typename?: 'LeagueType';
   city: Scalars['String']['output'];
+  id: Scalars['String']['output'];
   name: Scalars['String']['output'];
-  owner_id: Scalars['Int']['output'];
+  owner: UserType;
+  size: Scalars['Int']['output'];
+};
+
+/** A message within a leagues chat */
+export type MessageType = {
+  __typename?: 'MessageType';
+  name: Scalars['String']['output'];
+  room: Scalars['String']['output'];
+  text: Scalars['String']['output'];
+  time: Scalars['String']['output'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createLeague: Scalars['Boolean']['output'];
   createUser: Scalars['Boolean']['output'];
+};
+
+
+export type MutationCreateLeagueArgs = {
+  city?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  owner_id?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -38,8 +58,20 @@ export type MutationCreateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  league: LeagueType;
   leagues: Array<LeagueType>;
+  messages: Array<MessageType>;
   user: UserType;
+};
+
+
+export type QueryLeagueArgs = {
+  id?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryMessagesArgs = {
+  room?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -51,6 +83,7 @@ export type QueryUserArgs = {
 export type UserType = {
   __typename?: 'UserType';
   email: Scalars['String']['output'];
+  leagues: Array<LeagueType>;
   name: Scalars['String']['output'];
 };
 
@@ -70,10 +103,41 @@ export type CreateUserMutationVariables = Exact<{
 
 export type CreateUserMutation = { __typename?: 'Mutation', createUser: boolean };
 
+export type CreateLeagueMutationVariables = Exact<{
+  name: Scalars['String']['input'];
+  city: Scalars['String']['input'];
+  size: Scalars['Int']['input'];
+  owner_id: Scalars['String']['input'];
+}>;
+
+
+export type CreateLeagueMutation = { __typename?: 'Mutation', createLeague: boolean };
+
 export type GetLeaguesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetLeaguesQuery = { __typename?: 'Query', leagues: Array<{ __typename?: 'LeagueType', name: string, city: string, owner_id: number }> };
+export type GetLeaguesQuery = { __typename?: 'Query', leagues: Array<{ __typename?: 'LeagueType', id: string, name: string, city: string, size: number }> };
+
+export type GetLeagueQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type GetLeagueQuery = { __typename?: 'Query', league: { __typename?: 'LeagueType', id: string, name: string, city: string, size: number } };
+
+export type GetUsersLeaguesQueryVariables = Exact<{
+  token: Scalars['String']['input'];
+}>;
+
+
+export type GetUsersLeaguesQuery = { __typename?: 'Query', user: { __typename?: 'UserType', leagues: Array<{ __typename?: 'LeagueType', id: string, name: string, city: string, size: number }> } };
+
+export type GetMessagesQueryVariables = Exact<{
+  room: Scalars['String']['input'];
+}>;
+
+
+export type GetMessagesQuery = { __typename?: 'Query', messages: Array<{ __typename?: 'MessageType', text: string, name: string, time: string }> };
 
 
 export const GetUserDocument = gql`
@@ -89,12 +153,49 @@ export const CreateUserDocument = gql`
   createUser(token: $token, email: $email, name: $name)
 }
     `;
+export const CreateLeagueDocument = gql`
+    mutation CreateLeague($name: String!, $city: String!, $size: Int!, $owner_id: String!) {
+  createLeague(name: $name, city: $city, size: $size, owner_id: $owner_id)
+}
+    `;
 export const GetLeaguesDocument = gql`
     query GetLeagues {
   leagues {
+    id
     name
     city
-    owner_id
+    size
+  }
+}
+    `;
+export const GetLeagueDocument = gql`
+    query GetLeague($id: String!) {
+  league(id: $id) {
+    id
+    name
+    city
+    size
+  }
+}
+    `;
+export const GetUsersLeaguesDocument = gql`
+    query GetUsersLeagues($token: String!) {
+  user(token: $token) {
+    leagues {
+      id
+      name
+      city
+      size
+    }
+  }
+}
+    `;
+export const GetMessagesDocument = gql`
+    query GetMessages($room: String!) {
+  messages(room: $room) {
+    text
+    name
+    time
   }
 }
     `;
@@ -107,8 +208,20 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
     CreateUser(variables: CreateUserMutationVariables, options?: C): Promise<ExecutionResult<CreateUserMutation, E>> {
       return requester<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, variables, options) as Promise<ExecutionResult<CreateUserMutation, E>>;
     },
+    CreateLeague(variables: CreateLeagueMutationVariables, options?: C): Promise<ExecutionResult<CreateLeagueMutation, E>> {
+      return requester<CreateLeagueMutation, CreateLeagueMutationVariables>(CreateLeagueDocument, variables, options) as Promise<ExecutionResult<CreateLeagueMutation, E>>;
+    },
     GetLeagues(variables?: GetLeaguesQueryVariables, options?: C): Promise<ExecutionResult<GetLeaguesQuery, E>> {
       return requester<GetLeaguesQuery, GetLeaguesQueryVariables>(GetLeaguesDocument, variables, options) as Promise<ExecutionResult<GetLeaguesQuery, E>>;
+    },
+    GetLeague(variables: GetLeagueQueryVariables, options?: C): Promise<ExecutionResult<GetLeagueQuery, E>> {
+      return requester<GetLeagueQuery, GetLeagueQueryVariables>(GetLeagueDocument, variables, options) as Promise<ExecutionResult<GetLeagueQuery, E>>;
+    },
+    GetUsersLeagues(variables: GetUsersLeaguesQueryVariables, options?: C): Promise<ExecutionResult<GetUsersLeaguesQuery, E>> {
+      return requester<GetUsersLeaguesQuery, GetUsersLeaguesQueryVariables>(GetUsersLeaguesDocument, variables, options) as Promise<ExecutionResult<GetUsersLeaguesQuery, E>>;
+    },
+    GetMessages(variables: GetMessagesQueryVariables, options?: C): Promise<ExecutionResult<GetMessagesQuery, E>> {
+      return requester<GetMessagesQuery, GetMessagesQueryVariables>(GetMessagesDocument, variables, options) as Promise<ExecutionResult<GetMessagesQuery, E>>;
     }
   };
 }
