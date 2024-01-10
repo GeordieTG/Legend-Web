@@ -9,7 +9,6 @@ const Profile = () => {
 
     const [user, setUser] = useState<UserType>();
     const token: any = localStorage.getItem("user")
-    console.log(token)
 
     React.useEffect(() => {
         api.GetUser({ token: token }).then((response: any) => {setUser(response.user)})
@@ -66,7 +65,6 @@ const Profile = () => {
                             <p className="text-black font-bold">All Competitions</p>
                             <div className="flex items-center gap-10 mt-3 h-3/4">
                                 <LeagueCompIcon text="Canterbury Rugby League" image="/crl.webp"/>
-                                <LeagueCompIcon text="West Coast Basketball" image="/wcba.png"/>
                             </div>
                         </div>
 

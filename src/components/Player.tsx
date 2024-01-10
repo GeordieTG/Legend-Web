@@ -11,10 +11,10 @@ const Player = (props: any) => {
                         <img
                             className="rounded-full border"
                             style={{ width: "3rem", height: "3rem", objectFit: "cover" }}
-                            src={props.image || "/defaultpfp.svg"}
+                            src={props.image || "/greyPlus.jpeg"}
                         />
 
-                        <p className={"text-black text-center"}>{props.text || "Geordie Gibson"}</p>
+                        <p className={"text-black text-center"}>{props.text || "Add Player"}</p>
                     </div>
 
                 </Dialog.Trigger>

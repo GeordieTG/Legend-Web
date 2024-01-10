@@ -49,3 +49,11 @@ query GetMessages($room: String!) {
     time
   }
 }
+
+query GetLeagueMembers($leagueId: String!) {
+  league(id: $leagueId) {
+    members {
+      name
+    }
+  }
+}

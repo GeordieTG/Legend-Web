@@ -21,6 +21,7 @@ export type LeagueType = {
   __typename?: 'LeagueType';
   city: Scalars['String']['output'];
   id: Scalars['String']['output'];
+  members: Array<UserType>;
   name: Scalars['String']['output'];
   owner: UserType;
   size: Scalars['Int']['output'];
@@ -139,6 +140,13 @@ export type GetMessagesQueryVariables = Exact<{
 
 export type GetMessagesQuery = { __typename?: 'Query', messages: Array<{ __typename?: 'MessageType', text: string, name: string, time: string }> };
 
+export type GetLeagueMembersQueryVariables = Exact<{
+  leagueId: Scalars['String']['input'];
+}>;
+
+
+export type GetLeagueMembersQuery = { __typename?: 'Query', league: { __typename?: 'LeagueType', members: Array<{ __typename?: 'UserType', name: string }> } };
+
 
 export const GetUserDocument = gql`
     query GetUser($token: String!) {
@@ -199,6 +207,15 @@ export const GetMessagesDocument = gql`
   }
 }
     `;
+export const GetLeagueMembersDocument = gql`
+    query GetLeagueMembers($leagueId: String!) {
+  league(id: $leagueId) {
+    members {
+      name
+    }
+  }
+}
+    `;
 export type Requester<C = {}, E = unknown> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<ExecutionResult<R, E>> | AsyncIterable<ExecutionResult<R, E>>
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
@@ -222,6 +239,9 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
     },
     GetMessages(variables: GetMessagesQueryVariables, options?: C): Promise<ExecutionResult<GetMessagesQuery, E>> {
       return requester<GetMessagesQuery, GetMessagesQueryVariables>(GetMessagesDocument, variables, options) as Promise<ExecutionResult<GetMessagesQuery, E>>;
+    },
+    GetLeagueMembers(variables: GetLeagueMembersQueryVariables, options?: C): Promise<ExecutionResult<GetLeagueMembersQuery, E>> {
+      return requester<GetLeagueMembersQuery, GetLeagueMembersQueryVariables>(GetLeagueMembersDocument, variables, options) as Promise<ExecutionResult<GetLeagueMembersQuery, E>>;
     }
   };
 }

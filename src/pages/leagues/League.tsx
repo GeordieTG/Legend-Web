@@ -1,9 +1,10 @@
 import { useLocation } from "react-router-dom";
 import Sidebar from "../../components/Sidebar"
 import React from 'react'
-import { LeagueType } from "../../graphql";
 import { api } from "../../graphql/requester";
-import Chat from "../../components/Chat";
+import Chat from "../../components/LeaguePage/Chat";
+import Members from "../../components/LeaguePage/Members";
+import { LeagueType } from "../../graphql";
 
 const League = () => {
 
@@ -11,13 +12,19 @@ const League = () => {
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get('id') as string;
 
+    const [userLeagues, setUserLeagues] = React.useState<Array<LeagueType>>();
+    const token: any = localStorage.getItem("user")
     const [league, setLeague] = React.useState<LeagueType>()
     const [tab, setTab] = React.useState<string>("draw")
 
     React.useEffect(() => {
         api.GetLeague( {id: id}).then((response) => setLeague(response.league))
-       
+        api.GetUsersLeagues({ token: token }).then((response: any) => {setUserLeagues(response.user.leagues)})
     }, [])
+
+    const isLeagueMember = () => {
+        return userLeagues?.some(leagueItem => leagueItem.id === league?.id)
+    }
 
     return (
         <>
@@ -48,7 +55,7 @@ const League = () => {
                     </div>
                 </div>
 
-                <button className="border-2 rounded-3xl font-bold raleway m-3 bg-white text-black px-3 py-1 absolute top-0 right-0">Edit League</button>
+                <button className="border-2 rounded-3xl font-bold raleway m-3 bg-white text-black px-3 py-1 absolute top-0 right-0">{isLeagueMember() ? "Edit" : "Join"}</button>
             </div>
 
             {/*Nav*/}
@@ -60,7 +67,7 @@ const League = () => {
             </div>
 
             {tab === "draw" && <h1>Draw</h1>}
-            {tab === "members" && <h1>Members</h1>}
+            {tab === "members" && <Members league={league}/>}
             {tab === "leaderboard" && <h1>Leaderboard</h1>}
             {tab === "chat" && <Chat room={league?.name} />}
 
