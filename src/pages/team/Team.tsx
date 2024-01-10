@@ -1,6 +1,5 @@
 import Sidebar from "../../components/Sidebar";
 import TeamComponent from "../../components/Team";
-import TeamRow from "../../components/TeamRow";
 import TeamMenu from "../../components/TeamMenu";
 import Reserves from "../../components/Reserves";
 
