@@ -24,7 +24,7 @@ const SearchLeagues = () => {
 
     return (
         <>
-            <div className="flex bg-zinc-100">
+            <div className="flex bg-white">
                 <Sidebar />
                 <div className="p-16 w-full">
 

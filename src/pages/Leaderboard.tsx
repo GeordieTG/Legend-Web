@@ -1,10 +1,12 @@
+import MyDrawer from "../components/Drawer"
 import LeaderboardVisual from "../components/LeaderboardVisual"
 import Sidebar from "../components/Sidebar"
+import { motion } from "framer-motion"
 
 const Leaderboard = () => {
     return(
         <>
-            <div className="flex bg-zinc-100">
+            <div className="flex bg-white">
 
                 <Sidebar />
 
@@ -15,6 +17,9 @@ const Leaderboard = () => {
 
                         <div className="space-y-3 mt-10">
                         </div>
+
+                            <MyDrawer />
+
                 </div>
             </div>
         </>

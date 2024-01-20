@@ -2,45 +2,45 @@ import {Link} from "react-router-dom";
 
 const Sidebar = () => {
     return (
-        <div style={{minWidth: "15rem", maxWidth:"15rem"}} className="raleway bg-black p-10 h-screen">
+        <div style={{minWidth: "15rem", maxWidth:"15rem"}} className="raleway p-3 border bg-zinc-50 h-screen">
 
-            <h1 className="mt-5 text-white">legend.</h1>
+            <h1 className="px-2 mt-10">legend.</h1>
 
-            <div className="mt-20 flex flex-col gap-10">
+            <div className="mt-16 flex flex-col gap-1">
 
-                <div className="flex space-x-4">
-                    <p><i className="sidebarText bi bi-dribbble"></i></p>
-                    <Link to="/team">Team</Link>
+                <div className="flex space-x-4 rounded-lg p-2 hover:bg-gray-200">
+                    <p><i style={{color:"black"}} className="sidebarText bi bi-dribbble"></i></p>
+                    <Link className="text-black" to="/team">Team</Link>
                 </div>
 
-                <div className="flex space-x-4">
-                    <p><i className="sidebarText bi bi-trophy"></i> </p>
-                    <Link to="/leagues">Leagues</Link>
+                <div className="flex space-x-4 rounded-lg p-2 hover:bg-gray-200">
+                    <p><i style={{color:"black"}} className="sidebarText bi bi-trophy"></i> </p>
+                    <Link className="text-black" to="/leagues">Leagues</Link>
                 </div>
 
-                <div className="flex space-x-4">
-                    <p><i className="sidebarText bi bi-trophy"></i> </p>
-                    <Link to="/leaderboard">Leaderboard</Link>
+                <div className="flex space-x-4 rounded-lg p-2 hover:bg-gray-200">
+                    <p><i style={{color:"black"}} className="sidebarText bi bi-trophy"></i> </p>
+                    <Link className="text-black" to="/leaderboard">Leaderboard</Link>
                 </div>
 
-                <div className="flex space-x-4">
-                    <p><i className="sidebarText bi bi-bar-chart"></i></p>
-                    <Link to="/statistics">Statistics</Link>
+                <div className="flex space-x-4 rounded-lg p-2 hover:bg-gray-200">
+                    <p><i style={{color:"black"}} className="sidebarText bi bi-bar-chart"></i></p>
+                    <Link className="text-black" to="/statistics">Statistics</Link>
                 </div>
 
             </div>
 
-            <div className="fixed bottom-5 left-5">
+            <div className="fixed bottom-5">
 
-                <div className="flex space-x-2 items-center">
+                <div className="flex space-x-2 items-center rounded px-2 hover:bg-gray-200">
                     <img
                         className="rounded-3xl border"
                         style={{width: "2rem", height: "2rem"}}
                         src="/defaultpfp.svg"
                     />
                     <div>
-                        <Link to="/profile">Geordie Gibson</Link>
-                        <p className="sidebarText">CRL</p>
+                        <Link className="text-black" to="/profile">Geordie Gibson</Link>
+                        <p className="text-gray-500">CRL</p>
                     </div>
                 </div>
             </div>

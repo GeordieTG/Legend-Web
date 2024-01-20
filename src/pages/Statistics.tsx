@@ -2,7 +2,7 @@ import Sidebar from "../components/Sidebar";
 
 const Statistics = () => {
     return (
-        <div className="flex bg-zinc-100">
+        <div className="flex bg-white">
             <Sidebar />
 
             <div className="p-16">

@@ -15,7 +15,7 @@ const Profile = () => {
     }, []);
         
     return (
-        <div className="flex bg-zinc-100">
+        <div className="flex bg-white">
 
             <Sidebar />
 

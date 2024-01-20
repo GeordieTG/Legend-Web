@@ -28,7 +28,7 @@ const League = () => {
 
     return (
         <>
-    <div className="flex bg-zinc-100">
+    <div className="flex bg-white">
 
         <Sidebar />
         <div className="p-8 w-full">
