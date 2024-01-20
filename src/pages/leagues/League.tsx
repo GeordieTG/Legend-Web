@@ -60,15 +60,11 @@ const League = () => {
 
             {/*Nav*/}
             <div className="bg-white mt-2 rounded-xl py-2 px-3 flex gap-x-5">
-                <button className="text-black" onClick={() => setTab("draw")}>Draw</button>
                 <button className="text-black" onClick={() => setTab("members")}>Members</button>
-                <button className="text-black" onClick={() => setTab("leaderboard")}>Leaderboard</button>
                 <button className="text-black" onClick={() => setTab("chat")}>Chat</button>
             </div>
 
-            {tab === "draw" && <h1>Draw</h1>}
             {tab === "members" && <Members league={league}/>}
-            {tab === "leaderboard" && <h1>Leaderboard</h1>}
             {tab === "chat" && <Chat room={league?.name} />}
 
         </div>
