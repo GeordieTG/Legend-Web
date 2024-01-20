@@ -8,7 +8,7 @@ const Team = () => {
     console.log("made it")
 
     return (
-        <div className="bg-zinc-100 w-full">
+        <div className="bg-white w-full">
 
             <div className="flex w-full">
 
