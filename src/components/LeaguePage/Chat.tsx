@@ -1,6 +1,6 @@
 import React from "react"
 import io, { Socket } from 'socket.io-client'
-import { api } from "../graphql/requester";
+import { api } from "../../graphql/requester";
 
 const Chat = (props: any) => {
 
