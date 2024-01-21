@@ -5,7 +5,7 @@ import TradeComponent from "../../components/TradeComponent";
 const Trade = () => {
     return (
         <div className="flex bg-white">
-            <Sidebar />
+            <Sidebar page="team"/>
             <div className="p-16 w-full">
 
                 <TeamMenu page="trade"/>

@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 const Statistics = () => {
     return (
         <div className="flex bg-white">
-            <Sidebar />
+            <Sidebar page="statistics"/>
 
             <div className="p-16">
                 <h1>Statistics</h1>

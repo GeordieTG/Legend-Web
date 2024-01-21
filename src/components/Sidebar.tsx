@@ -1,30 +1,32 @@
 import {Link} from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = (props: any) => {
+
+    console.log(props.page)
     return (
-        <div style={{minWidth: "15rem", maxWidth:"15rem"}} className="raleway p-3 border bg-zinc-100 h-screen">
+        <div style={{minWidth: "15rem", maxWidth:"15rem"}} className="raleway p-3 border bg-zinc-50 h-screen">
 
             <h1 className="px-2 mt-10">legend.</h1>
 
             <div className="mt-16 flex flex-col gap-1">
-                <div className="flex space-x-4 rounded-lg p-2 hover:bg-gray-200">
-                    <p><i style={{color:"black"}} className="sidebarText bi bi-dribbble"></i></p>
-                    <Link className="text-black" to="/team">Team</Link>
+                <div className={`${props.page === "team" ? "bg-black" : "hover:bg-gray-200"} flex space-x-4 rounded-lg p-2`}>
+                    <p><i className={`${props.page === "team" ? "text-white" : ""} bi bi-dribbble`}></i></p>
+                    <Link className={`${props.page !== "team" ? "text-black" : ""}`} to="/team">Team</Link>
                 </div>
 
-                <div className="flex space-x-4 rounded-lg p-2 hover:bg-gray-200">
-                    <p><i style={{color:"black"}} className="sidebarText bi bi-trophy"></i> </p>
-                    <Link className="text-black" to="/leagues">Leagues</Link>
+                <div className={`${props.page === "leagues" ? "bg-black" : "hover:bg-gray-200"} flex space-x-4 rounded-lg p-2`}>
+                    <p><i className={`${props.page === "leagues" ? "text-white" : ""} bi bi-trophy`}></i></p>
+                    <Link className={`${props.page !== "leagues" ? "text-black" : ""}`} to="/leagues">Leagues</Link>
                 </div>
 
-                <div className="flex space-x-4 rounded-lg p-2 hover:bg-gray-200">
-                    <p><i style={{color:"black"}} className="sidebarText bi bi-trophy"></i> </p>
-                    <Link className="text-black" to="/leaderboard">Leaderboard</Link>
+                <div className={`${props.page === "leaderboard" ? "bg-black" : "hover:bg-gray-200"} flex space-x-4 rounded-lg p-2`}>
+                    <p><i className={`${props.page === "leaderboard" ? "text-white" : ""} bi bi-trophy`}></i></p>
+                    <Link className={`${props.page !== "leaderboard" ? "text-black" : ""}`} to="/leaderboard">Leaderboard</Link>
                 </div>
 
-                <div className="flex space-x-4 rounded-lg p-2 hover:bg-gray-200">
-                    <p><i style={{color:"black"}} className="sidebarText bi bi-bar-chart"></i></p>
-                    <Link className="text-black" to="/statistics">Statistics</Link>
+                <div className={`${props.page === "statistics" ? "bg-black" : "hover:bg-gray-200"} flex space-x-4 rounded-lg p-2`}>
+                    <p><i className={`${props.page === "statistics" ? "text-white" : ""} bi bi-bar-chart`}></i></p>
+                    <Link className={`${props.page !== "statistics" ? "text-black" : ""}`} to="/statistics">Statistics</Link>
                 </div>
             </div>
 

@@ -8,7 +8,7 @@ const Leaderboard = () => {
         <>
             <div className="flex bg-white">
 
-                <Sidebar />
+                <Sidebar page="leaderboard"/>
 
                 <div className="p-16 w-full">
                         <h1>Leaderboard</h1>

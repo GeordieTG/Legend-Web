@@ -25,7 +25,7 @@ const MyLeagues = () => {
 
     return (
         <div className="flex bg-white">
-            <Sidebar />
+            <Sidebar page="leagues"/>
             <div className="p-16 w-full">
 
                 <LeaguesMenu page="leagues"/>

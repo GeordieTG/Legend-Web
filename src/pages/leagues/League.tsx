@@ -30,7 +30,8 @@ const League = () => {
         <>
     <div className="flex bg-white">
 
-        <Sidebar />
+        <Sidebar page="leagues"/>
+        
         <div className="p-8 w-full">
 
             {/*Banner Image*/}

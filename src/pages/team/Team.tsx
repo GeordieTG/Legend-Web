@@ -12,7 +12,7 @@ const Team = () => {
 
             <div className="flex w-full">
 
-                <Sidebar />
+                <Sidebar page="team"/>
 
                 <div className="flex p-16 flex-col w-full">
 
