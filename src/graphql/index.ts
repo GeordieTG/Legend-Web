@@ -21,6 +21,7 @@ export type LeagueType = {
   __typename?: 'LeagueType';
   city: Scalars['String']['output'];
   id: Scalars['String']['output'];
+  image: Scalars['String']['output'];
   members: Array<UserType>;
   name: Scalars['String']['output'];
   owner: UserType;
@@ -117,21 +118,21 @@ export type CreateLeagueMutation = { __typename?: 'Mutation', createLeague: bool
 export type GetLeaguesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetLeaguesQuery = { __typename?: 'Query', leagues: Array<{ __typename?: 'LeagueType', id: string, name: string, city: string, size: number }> };
+export type GetLeaguesQuery = { __typename?: 'Query', leagues: Array<{ __typename?: 'LeagueType', id: string, name: string, city: string, image: string, size: number }> };
 
 export type GetLeagueQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type GetLeagueQuery = { __typename?: 'Query', league: { __typename?: 'LeagueType', id: string, name: string, city: string, size: number } };
+export type GetLeagueQuery = { __typename?: 'Query', league: { __typename?: 'LeagueType', id: string, name: string, city: string, image: string, size: number } };
 
 export type GetUsersLeaguesQueryVariables = Exact<{
   token: Scalars['String']['input'];
 }>;
 
 
-export type GetUsersLeaguesQuery = { __typename?: 'Query', user: { __typename?: 'UserType', leagues: Array<{ __typename?: 'LeagueType', id: string, name: string, city: string, size: number }> } };
+export type GetUsersLeaguesQuery = { __typename?: 'Query', user: { __typename?: 'UserType', leagues: Array<{ __typename?: 'LeagueType', id: string, name: string, city: string, image: string, size: number }> } };
 
 export type GetMessagesQueryVariables = Exact<{
   room: Scalars['String']['input'];
@@ -172,6 +173,7 @@ export const GetLeaguesDocument = gql`
     id
     name
     city
+    image
     size
   }
 }
@@ -182,6 +184,7 @@ export const GetLeagueDocument = gql`
     id
     name
     city
+    image
     size
   }
 }
@@ -193,6 +196,7 @@ export const GetUsersLeaguesDocument = gql`
       id
       name
       city
+      image
       size
     }
   }

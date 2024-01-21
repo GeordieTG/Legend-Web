@@ -18,6 +18,7 @@ query GetLeagues {
     id,
     name,
     city,
+    image,
     size
   }
 }
@@ -27,6 +28,7 @@ query GetLeague($id: String!) {
     id,
     name,
     city,
+    image,
     size
   }
 }
@@ -37,6 +39,7 @@ query GetUsersLeagues($token: String!) {
       id,
       name,
       city,
+      image,
       size
     }
   }

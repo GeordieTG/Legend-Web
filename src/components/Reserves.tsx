@@ -2,7 +2,7 @@ import TeamRow from "./TeamRow";
 
 const Reserves = () => {
     return (
-        <div className="bg-white rounded-xl p-5 space-y-10">
+        <div className="bg-white border rounded-xl p-5 space-y-10">
             <p className="text-black font-bold text-xl">Interchange</p>
 
             <div className="flex">

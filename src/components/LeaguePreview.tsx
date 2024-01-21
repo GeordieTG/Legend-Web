@@ -6,6 +6,7 @@ const LeaguePreview = (props: any) => {
     return (
         <div>
             <Link to={"/league?id=" + props.league.id}>
+                
                 <div className="w-full bg-white flex grid grid-cols-3 items-center p-5">
                     <div className="ml-20 flex items-center gap-5">
                         <DefaultImage />

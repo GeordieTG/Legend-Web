@@ -3,7 +3,7 @@ import LeaguesMenu from "../../components/LeaguesMenu";
 import { api } from "../../graphql/requester";
 import React from 'react'
 import { LeagueType } from "../../graphql";
-import LeaguePreview from "../../components/LeaguePreview";
+import MyLeaguePreview from "../../components/MyLeaguePreview";
 
 const MyLeagues = () => {
 
@@ -15,13 +15,13 @@ const MyLeagues = () => {
     }, [])
     
     const userLeagues = (): JSX.Element[] => {
+        console.log(leagues)
         return leagues.map((league: any, index: any) => 
             <div key={index}>
-                <LeaguePreview league={league}/>
+                <MyLeaguePreview league={league}/>
             </div>
         )
     }
-
 
     return (
         <div className="flex bg-white">
@@ -31,11 +31,19 @@ const MyLeagues = () => {
                 <LeaguesMenu page="leagues"/>
 
                 {/*Users Leagues*/}
-                <div className="space-y-3 mt-20">
-                {leagues.length ? <div className="d-flex flex-wrap justify-content-evenly">
-                                {userLeagues()}
-                            </div> : <div><div className="text-center display-5"><i className="bi bi-emoji-frown-fill"></i></div> <div className="fs-5 text-center"> No leagues meet the search criteria</div></div>}                </div>
-
+                <div className="mt-20">
+                {leagues.length ? 
+                    <div className="flex space-x-3 flex-wrap">
+                        {userLeagues()}
+                    </div> 
+                    : 
+                    <div>
+                        <div className="text-center display-5"><i className="bi bi-emoji-frown-fill"></i></div> 
+                        <div className="fs-5 text-center">Failed to fetch leagues</div>
+                    </div>
+                }
+                </div>
+                
             </div>
         </div>
     )
