@@ -21,7 +21,7 @@ export type LeagueType = {
   __typename?: 'LeagueType';
   city: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  image: Scalars['String']['output'];
+  image?: Maybe<Scalars['String']['output']>;
   members: Array<UserType>;
   name: Scalars['String']['output'];
   owner: UserType;
@@ -35,6 +35,7 @@ export type MessageType = {
   room: Scalars['String']['output'];
   text: Scalars['String']['output'];
   time: Scalars['String']['output'];
+  user: UserType;
 };
 
 export type Mutation = {
@@ -85,6 +86,7 @@ export type QueryUserArgs = {
 export type UserType = {
   __typename?: 'UserType';
   email: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   leagues: Array<LeagueType>;
   name: Scalars['String']['output'];
 };
@@ -118,28 +120,28 @@ export type CreateLeagueMutation = { __typename?: 'Mutation', createLeague: bool
 export type GetLeaguesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetLeaguesQuery = { __typename?: 'Query', leagues: Array<{ __typename?: 'LeagueType', id: string, name: string, city: string, image: string, size: number }> };
+export type GetLeaguesQuery = { __typename?: 'Query', leagues: Array<{ __typename?: 'LeagueType', id: string, name: string, city: string, image?: string | null, size: number }> };
 
 export type GetLeagueQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type GetLeagueQuery = { __typename?: 'Query', league: { __typename?: 'LeagueType', id: string, name: string, city: string, image: string, size: number } };
+export type GetLeagueQuery = { __typename?: 'Query', league: { __typename?: 'LeagueType', id: string, name: string, city: string, image?: string | null, size: number } };
 
 export type GetUsersLeaguesQueryVariables = Exact<{
   token: Scalars['String']['input'];
 }>;
 
 
-export type GetUsersLeaguesQuery = { __typename?: 'Query', user: { __typename?: 'UserType', leagues: Array<{ __typename?: 'LeagueType', id: string, name: string, city: string, image: string, size: number }> } };
+export type GetUsersLeaguesQuery = { __typename?: 'Query', user: { __typename?: 'UserType', leagues: Array<{ __typename?: 'LeagueType', id: string, name: string, city: string, image?: string | null, size: number }> } };
 
 export type GetMessagesQueryVariables = Exact<{
   room: Scalars['String']['input'];
 }>;
 
 
-export type GetMessagesQuery = { __typename?: 'Query', messages: Array<{ __typename?: 'MessageType', text: string, name: string, time: string }> };
+export type GetMessagesQuery = { __typename?: 'Query', messages: Array<{ __typename?: 'MessageType', text: string, time: string, user: { __typename?: 'UserType', id: number, name: string } }> };
 
 export type GetLeagueMembersQueryVariables = Exact<{
   leagueId: Scalars['String']['input'];
@@ -206,8 +208,11 @@ export const GetMessagesDocument = gql`
     query GetMessages($room: String!) {
   messages(room: $room) {
     text
-    name
     time
+    user {
+      id
+      name
+    }
   }
 }
     `;

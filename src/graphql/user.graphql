@@ -48,8 +48,11 @@ query GetUsersLeagues($token: String!) {
 query GetMessages($room: String!) {
   messages(room: $room) {
     text,
-    name,
-    time
+    time,
+    user {
+      id,
+      name
+    }
   }
 }
 

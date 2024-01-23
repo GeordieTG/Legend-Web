@@ -1,8 +1,10 @@
 import React from "react"
 import io, { Socket } from 'socket.io-client'
 import { api } from "../../graphql/requester";
+import IncomingMessage from "../IncomingMessage";
+import OutgoingMessage from "../OutgoingMessage";
 
-const Chat = (props: any) => {
+const ChatComponent = (props: any) => {
 
     const [messages, setMessages] = React.useState<string[]>([]);
     const [activity, setActivity] = React.useState(null)
@@ -11,7 +13,8 @@ const Chat = (props: any) => {
 
     React.useEffect(() => {
 
-      console.log(props.room)
+      document.getElementById("messageInput")?.focus()
+
       api.GetMessages( {room: props.room}).then((response) => setMessages(response.messages))
 
       const newSocket = io("ws://localhost:3500");
@@ -37,6 +40,10 @@ const Chat = (props: any) => {
       };
     }, []);
 
+    React.useEffect(() => {
+      console.log(messages)
+    }, [messages])
+    
     const sendMessage = () => {
       socket?.emit('message', {
         name: "Geordie Gibson",
@@ -55,22 +62,23 @@ const Chat = (props: any) => {
     }
 
     return (
-        <div className="flex justify-center mt-5 gap-x-3">
-        <input id="messageInput" onChange={(e) => {sendActivity(); setInput(e.target.value)}} value={input} className="rounded-3xl" style={{color: "black"}}></input>
-        <button onClick={() => {sendMessage(); setInput("")}} style={{background: "black"}}>Send</button>
+      <div className="flex flex-col w-full h-full">
 
-        <div id="chat">
+        <div id="chat" className="flex-1 flex flex-col-reverse overflow-auto">
           {messages.map((message, index) => (
-            <div style={{color: "black"}} key={index}>{message.name}: {message.text} @ {message.time}</div>
+            message.user.id == 1 ? <OutgoingMessage index={index} message={message}/> : <IncomingMessage index={index} message={message} />
           ))}
-        </div>
 
-        <div id="chat">
           {activity && <p>{activity} is typing</p>}
         </div>
 
+        <div id="input" className="my-3 flex space-x-1 flex-shrink-0">
+          <input autoComplete="off" id="messageInput" placeholder="Type a message..."  onChange={(e) => {sendActivity(); setInput(e.target.value)}} value={input} className="px-3 w-full bg-zinc-100 h-10 rounded-xl"></input>
+          <button className="h-10 rounded-lg" onClick={() => {sendMessage(); setInput("")}} style={{background: "black"}}>Send</button>
         </div>
+        
+      </div>
     )
 }
 
-export default Chat
+export default ChatComponent

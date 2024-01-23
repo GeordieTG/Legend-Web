@@ -12,6 +12,7 @@ import CreateLeague from "./pages/leagues/CreateLeague";
 import Trade from "./pages/team/Trade";
 import League from './pages/leagues/League';
 import Leaderboard from './pages/leaderboard';
+import Chat from './pages/leagues/Chat';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                         <Route path="/statistics" element={<Statistics />}/>
                         <Route path="/league" element={<League />}/>
                         <Route path="/leaderboard" element={<Leaderboard />}/>
+                        <Route path="/chat" element={<Chat />}/>
                     </Routes>
                 </div>
             </Router>

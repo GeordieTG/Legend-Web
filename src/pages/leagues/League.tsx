@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import Sidebar from "../../components/Sidebar"
 import React from 'react'
 import { api } from "../../graphql/requester";
-import Chat from "../../components/LeaguePage/Chat";
+import ChatComponent from "../../components/LeaguePage/Chat";
 import Members from "../../components/LeaguePage/Members";
 import { LeagueType } from "../../graphql";
 
@@ -66,7 +66,7 @@ const League = () => {
             </div>
 
             {tab === "members" && <Members league={league}/>}
-            {tab === "chat" && <Chat room={league?.name} />}
+            {tab === "chat" && <ChatComponent room={league?.name} />}
 
         </div>
     </div>

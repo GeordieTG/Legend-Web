@@ -35,7 +35,7 @@ const Sidebar = (props: any) => {
             <div>
                 <h2 className="mb-5 text-gray-600">My Leagues</h2>
                 <div className="flex space-x-4 rounded-lg p-2 hover:bg-gray-200">
-                    <Link className="text-black" to="/statistics">Bishops</Link>
+                    <Link className="text-black" to="/chat?id=28">Bishops</Link>
                 </div>
                 <div className="flex space-x-4 rounded-lg p-2 hover:bg-gray-200">
                     <Link className="text-black" to="/statistics">UC</Link>
